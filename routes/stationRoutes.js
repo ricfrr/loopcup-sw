@@ -59,8 +59,8 @@ router.post('/cup', async function (req, res, next) {
         }
         let val = await StationDAO.insertCupBin(bin_id, cup_id);
         if (val) {
-            let event_org = await EventOrganizerDAO.getEventOrganizerByBinId(bin_id);
-            let resp = await ProfileDAO.updateMoney(event_org.getMoneyCup(), cup_id);
+            //let event_org = await EventOrganizerDAO.getEventOrganizerByBinId(bin_id);
+            //let resp = await ProfileDAO.updateMoney(event_org.getMoneyCup(), cup_id);
             res.status(200).end();
             return;
         } else {
