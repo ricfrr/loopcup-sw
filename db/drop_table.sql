@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS profile,bar_owner,coupon,coupon_profile,station,cup,cup_profile,cup_station,transaction;
