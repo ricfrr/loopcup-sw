@@ -4,10 +4,7 @@ CREATE TABLE IF NOT EXISTS
         id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
         profile_name VARCHAR(128),
         mail VARCHAR(256) UNIQUE,
-        age INTEGER,
-        profile_pic VARCHAR(256),
-        password VARCHAR(256) NOT NULL,
-        money_bin INTEGER NOT NULL
+        loop_coins INTEGER NOT NULL
       );
 
 
@@ -17,7 +14,7 @@ CREATE TABLE IF NOT EXISTS
         profile_name VARCHAR(128),
         mail VARCHAR(256) UNIQUE,
         password VARCHAR(256) NOT NULL,
-        loopcoins INTEGER NOT NULL,
+        loop_coins INTEGER NOT NULL,
         money_bin INTEGER NOT NULL
       );
 
@@ -27,6 +24,8 @@ CREATE TABLE IF NOT EXISTS
             cost INTEGER NOT NULL,
             message VARCHAR(256) NOT NULL,
             bar_owner_id uuid,
+            description VARCHAR(1000) NOT NULL,
+            img VARCHAR(256) NOT NULL,
             FOREIGN KEY (bar_owner_id) REFERENCES bar_owner(id)
       );
 

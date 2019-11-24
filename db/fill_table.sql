@@ -1,18 +1,18 @@
-INSERT INTO profile (id,profile_name,mail,age,profile_pic,password,money_bin) VALUES
-    ('13f3edc7-996d-4e68-8489-67c578af1138','riccardo','riccardo.franceschini@unitn.it', 23,'profile.jpg','d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1',1500);
+INSERT INTO profile (id,profile_name,mail,loop_coins) VALUES
+    ('13f3edc7-996d-4e68-8489-67c578af1138','riccardo','riccioluto@hotmail.it',1500);
 
-INSERT INTO bar_owner (id,profile_name,mail,password,loopcoins,money_bin) VALUES
+INSERT INTO bar_owner (id,profile_name,mail,password,loop_coins,money_bin) VALUES
     ('5165e699-852c-46cd-a44a-4c50c5262b96','LatexPlus', 'latex.plus@mail.it','d74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1',20,10);
 
     
-INSERT INTO coupon (id,cost, message, bar_owner_id) VALUES
-    ('c1107fe2-96db-4bb5-905f-6132c7957b81',50, 'Medium Beer','5165e699-852c-46cd-a44a-4c50c5262b96');
+INSERT INTO coupon (id,cost, message, bar_owner_id, description, img) VALUES
+    ('c1107fe2-96db-4bb5-905f-6132c7957b81',50, 'Medium IPA','5165e699-852c-46cd-a44a-4c50c5262b96', 'The export style of pale ale, which had become known as India pale ale, developed in England around 1840, later became a popular product there. It became popular among East India Company traders in the late 18th century because of the brewery s location near the East India Docks in Blackwall, East London. ', 'images/beer.jpg');
 
-INSERT INTO coupon (id,cost, message, bar_owner_id) VALUES
-    ('5853d571-18d1-409e-a924-2678db2ec954',30, 'Small Beer','5165e699-852c-46cd-a44a-4c50c5262b96');
+INSERT INTO coupon (id,cost, message, bar_owner_id, description, img) VALUES
+    ('5853d571-18d1-409e-a924-2678db2ec954',30, 'Small IPA','5165e699-852c-46cd-a44a-4c50c5262b96','The export style of pale ale, which had become known as India pale ale, developed in England around 1840, later became a popular product there. It became popular among East India Company traders in the late 18th century because of the brewery s location near the East India Docks in Blackwall, East London. ', 'images/beer.jpg');
+INSERT INTO coupon (id,cost, message, bar_owner_id, description, img) VALUES
+    ('364a8ecd-6d88-4405-be33-621b06a0e0fd',50, 'Mojito','5165e699-852c-46cd-a44a-4c50c5262b96','Traditionally, a mojito is a cocktail that consists of five ingredients: white rum, sugar (traditionally sugar cane juice), lime juice, soda water, and mint.[1][2] Its combination of sweetness, citrus, and herbaceous mint flavors is intended to complement the rum, and has made the mojito a popular summer drink.', 'images/mojito.jpg');
 
-INSERT INTO coupon (id,cost, message, bar_owner_id) VALUES
-    ('2917dbc4-62e1-4641-8f28-88d097d72789',60, 'Long Drink','5165e699-852c-46cd-a44a-4c50c5262b96');
 
 INSERT INTO coupon_profile (profile_id,coupon_id,buy_time,used) VALUES
     ('13f3edc7-996d-4e68-8489-67c578af1138','c1107fe2-96db-4bb5-905f-6132c7957b81',now(),false); 

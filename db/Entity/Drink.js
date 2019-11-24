@@ -4,11 +4,13 @@ module.exports = class Coupon {
     /**
      * Creates a Coupon entity
      */
-    constructor(coupon_id, cost,message,event_id) {
+    constructor(coupon_id, cost, message, event_id, description, image) {
         this.setCouponId(coupon_id);
         this.setCost(cost);
         this.setMessage(message);
         this.setEventId(event_id);
+        this.setDescription(description)
+        this.setImage(image)
     }
 
     /**
@@ -26,7 +28,7 @@ module.exports = class Coupon {
      * @returns {number} 1 - Coupon_id is undefined
      */
     setCouponId(coupon_id) {
-        if(coupon_id != undefined) {
+        if (coupon_id != undefined) {
             this.coupon_id = coupon_id + '';
             return 0;
         }
@@ -34,10 +36,10 @@ module.exports = class Coupon {
     }
 
 
-            /**
-     * Returns the cost of a Coupon
-     * @returns {string} cost of the Coupon
-     */
+    /**
+* Returns the cost of a Coupon
+* @returns {string} cost of the Coupon
+*/
     getCost() {
         return this.cost;
     }
@@ -59,10 +61,10 @@ module.exports = class Coupon {
     }
 
 
-        /**
-     * Returns the message of a Coupon
-     * @returns {string} message of the Coupon
-     */
+    /**
+ * Returns the message of a Coupon
+ * @returns {string} message of the Coupon
+ */
     getMessage() {
         return this.message;
     }
@@ -74,7 +76,7 @@ module.exports = class Coupon {
      * @returns {number} 1 - message is undefined
      */
     setMessage(message) {
-        if(message != undefined) {
+        if (message != undefined) {
             this.message = message + '';
             return 0;
         }
@@ -97,12 +99,61 @@ module.exports = class Coupon {
      * @returns {number} 1 - event_id is undefined
      */
     setEventId(event_id) {
-        if(event_id != undefined) {
+        if (event_id != undefined) {
             this.event_id = event_id + '';
             return 0;
         }
         return 1;
     }
+
+
+    /**
+ * Returns the description of a Coupon
+ * @returns {string} description of the Coupon
+ */
+    getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Sets a new given description
+     * @param {string} description - The new description
+     * @returns {number} 0 - changes were applied successfully
+     * @returns {number} 1 - description is undefined
+     */
+    setDescription(description) {
+        if (description != undefined) {
+            this.description = description + '';
+            return 0;
+        }
+        return 1;
+    }
+
+
+
+    /**
+ * Returns the image of a Coupon
+ * @returns {string} image of the Coupon
+ */
+    getImage() {
+        return this.image;
+    }
+
+    /**
+     * Sets a new given image
+     * @param {string} image - The new image
+     * @returns {number} 0 - changes were applied successfully
+     * @returns {number} 1 - image is undefined
+     */
+    setImage(image) {
+        if (image != undefined) {
+            this.image = image + '';
+            return 0;
+        }
+        return 1;
+    }
+
+
 
 
 }

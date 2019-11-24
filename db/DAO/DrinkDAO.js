@@ -1,28 +1,28 @@
 'use strict';
 var db = require('../query');
-var Coupon = require('../Entity/Coupon');
-var ProfileDAO = require('../DAO/ProfileDAO');
-var EventOrganizerDAO = require('../DAO/EventOrganizerDAO');
+var Drink = require('../Entity/Drink');
+var ProfileDAO = require('./ProfileDAO');
+var EventOrganizerDAO = require('./EventOrganizerDAO');
 
 module.exports = class CouponDAO {
 
     /**
      *  return a coupon given the coupon id  
      */
-    static async getCouponById(coupon_id) {
-        if (coupon_id == undefined) {
+    static async getDrinkById(drink_id) {
+        if (drink_id == undefined) {
             return undefined;
         }
 
         let sql = `SELECT * FROM coupon WHERE id = $1`;
-        const values = [coupon_id];
+        const values = [drink_id];
 
         try {
             const result = await db.query(sql, values);
             let tempCoupon;
             console.log(result);
             if (result != undefined && result.length !=0) {
-                tempCoupon = new Coupon(result[0].id, result[0].cost,  result[0].message, result[0].event_id);
+                tempCoupon = new Drink(result[0].id, result[0].cost,  result[0].message, result[0].event_id, result[0].description,result[0].img);
             }
             return tempCoupon;
         } catch (err) {
@@ -46,7 +46,7 @@ module.exports = class CouponDAO {
             let tempCoupon;
             console.log(result);
             if (result != undefined && result.length !=0) {
-                tempCoupon = await this.getCouponById(result[0].coupon_id)
+                tempCoupon = await this.getDrinkById(result[0].coupon_id)
             }
             return tempCoupon;
         } catch (err) {
@@ -60,20 +60,20 @@ module.exports = class CouponDAO {
     /**
      *  return the list of all coupon  
      */
-    static async getAllCoupon() {
+    static async getAllDrink() {
         let sql = `SELECT * FROM coupon`;
         const values = [];
         try {
             const result = await db.query(sql, values);
             console.log(result);
-            let coupons=[];
+            let drinks=[];
             if (result != undefined && result.length !=0) {
                 for (let i = 0; i < result.length; i++) {
-                    let tmp_coup = new Coupon(result[i].id, result[i].cost, result[i].message, result[i].event_id);
-                    coupons.push(tmp_coup)
+                    let tmp_drinks = new Drink(result[i].id, result[i].cost, result[i].message, result[i].event_id, result[i].description, result[i].img);
+                    drinks.push(tmp_drinks)
                 }
             }
-            return coupons;
+            return drinks;
         } catch (err) {
             throw err;
         }
@@ -126,8 +126,8 @@ module.exports = class CouponDAO {
             const result = await db.query(sql, values);
             console.log(result);
             if (result != undefined) {
-                let coup = await this.getCouponById(coupon_id)
-                await ProfileDAO.decreaseMoneyBin(profile_id,coup.getCost())
+                let coup = await this.getDrinkById(coupon_id)
+                await ProfileDAO.decreaseLoopCoins(profile_id,coup.getCost())
                 let ev_org = await EventOrganizerDAO.getEventOrganizerByCouponId(coupon_id);
                 EventOrganizerDAO.increaseMoneyBin(ev_org.getEventOrganizerId(),coup.getCost())
                 console.log("drinks ok!");

@@ -4,15 +4,13 @@ module.exports = class Profile {
     /**
      * Creates a profile entity
      */
-    constructor(profile_id,profile_name,mail, age,profile_pic,password,money_bin) {
+    constructor(profile_id , profile_name,mail,loop_coins) {
         this.setProfileId(profile_id);
         this.setName(profile_name);
         this.setMail(mail);
-        this.setAge(age);
-        this.setProfilePic(profile_pic);
-        this.setPassword(password);
-        this.setMoneyBin(money_bin);
+        this.setLoopCoins(loop_coins);
     }
+
 
     /**
      * Returns the Profile_id of a Profile
@@ -85,102 +83,24 @@ module.exports = class Profile {
         return 1;
     }
 
-    /**
-     * Returns the age
-     * @returns {string} age
-     */
-    getAge() {
-        return this.age;
-    }
-
-    /**
-     * Sets a new given age
-     * @param {string} age - The new age
-     * @returns {number} 0 - changes were applied successfully
-     * @returns {number} 1 - age is undefined
-     */
-    setAge(age) {
-        if (age!== undefined) {
-            if (!isNaN(age)) {
-                this.age = age;
-                return 0;
-            }
-        }
-        return 1;
-    }
-
-
-    /**
-     * Returns the password of a Profile
-     * @returns {string} password of the Profile
-     */
-    getProfilePic() {
-        return this.profile_pic;
-    }
-
-    /**
-     * Sets a new given profile_pic
-     * @param {string} profile_pic - The new profile_pic
-     * @returns {number} 0 - changes were applied successfully
-     * @returns {number} 1 - profile_pic is undefined
-     */
-    setProfilePic(profile_pic) {
-        if(profile_pic !== undefined) {
-            if(profile_pic === null) {
-                this.profile_pic = profile_pic;
-            } else {
-                this.profile_pic = profile_pic + '';
-            }
-            return 0;
-        }
-        return 1;
-    }
-
-
         /**
-     * Returns the password of a Profile
-     * @returns {string} password of the Profile
+     * Returns the loop_coins of a Coupon
+     * @returns {string} loop_coins of the Coupon
      */
-    getPassword() {
-        return this.password;
+    getLoopCoins() {
+        return this.loop_coins;
     }
 
     /**
-     * Sets a new given password
-     * @param {string} password - The new password
+     * Sets a new given loop_coins
+     * @param {string} loop_coins - The new loop_coins
      * @returns {number} 0 - changes were applied successfully
-     * @returns {number} 1 - password is undefined
+     * @returns {number} 1 - loop_coins is undefined
      */
-    setPassword(password) {
-        if(password !== undefined) {
-            if(password === null) {
-                this.password = password;
-            } else {
-                this.password = password + '';    
-            }
-            return 0;
-        }
-        return 1;
-    }
-
-        /**
-     * Returns the money_bin of a Coupon
-     * @returns {string} money_bin of the Coupon
-     */
-    getMoneyBin() {
-        return this.money_bin;
-    }
-
-    /**
-     * Sets a new given money_bin
-     * @param {string} money_bin - The new money_bin
-     * @returns {number} 0 - changes were applied successfully
-     * @returns {number} 1 - money_bin is undefined
-     */
-    setMoneyBin(money_bin) {
-        if (money_bin !== undefined) {
-            if (!isNaN(money_bin)) {
-                this.money_bin = money_bin;
+    setLoopCoins(loop_coins) {
+        if (loop_coins !== undefined) {
+            if (!isNaN(loop_coins)) {
+                this.loop_coins = loop_coins;
                 return 0;
             }
         }

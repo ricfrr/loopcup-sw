@@ -1,7 +1,7 @@
 'use strict';
 var db = require('../query');
 var Bin = require('../Entity/Bin');
-var Coupon = require('../Entity/Coupon');
+var Coupon = require('../Entity/Drink');
 var EventOrganizer = require('../Entity/EventOrganizer');
 
 module.exports = class EventOrganizerDAO {
@@ -14,7 +14,7 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `SELECT * FROM event_organizer WHERE id = $1`;
+        let sql = `SELECT * FROM bar_owner WHERE id = $1`;
         const values = [event_id];
 
         try {
@@ -37,7 +37,7 @@ module.exports = class EventOrganizerDAO {
         if (mail == undefined) {
             return undefined;
         }
-        let sql = `SELECT * FROM event_organizer WHERE mail = $1`;
+        let sql = `SELECT * FROM bar_owner WHERE mail = $1`;
         const values = [mail];
         try {
             const result = await db.query(sql, values);
@@ -61,7 +61,7 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `SELECT * FROM event_organizer WHERE mail = $1 and password = $2 `;
+        let sql = `SELECT * FROM bar_owner WHERE mail = $1 and password = $2 `;
         const values = [mail, password];
 
         try {
@@ -146,9 +146,9 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `select event_organizer.id, event_organizer.profile_name,event_organizer.mail,event_organizer.password, event_organizer.money_trash,  event_organizer.money_bin 
-                   from bin join event_organizer 
-                   on bin.event_id= event_organizer.id
+        let sql = `select bar_owner.id, bar_owner.profile_name,bar_owner.mail,bar_owner.password, bar_owner.money_trash,  bar_owner.money_bin 
+                   from bin join bar_owner 
+                   on bin.event_id= bar_owner.id
                    where bin.id =$1;`;
         const values = [bin_id];
 
@@ -173,9 +173,9 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `select event_organizer.id, event_organizer.profile_name,event_organizer.mail,event_organizer.password, event_organizer.money_trash,  event_organizer.money_bin 
-                    from coupon join event_organizer 
-                    on coupon.event_id= event_organizer.id
+        let sql = `select bar_owner.id, bar_owner.profile_name,bar_owner.mail,bar_owner.password, bar_owner.loop_coins,  bar_owner.money_bin 
+                    from coupon join bar_owner 
+                    on coupon.bar_owner_id= bar_owner.id
                     where coupon.id =$1;`;
         const values = [coupon_id];
 
@@ -198,7 +198,7 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `UPDATE event_organizer set money_bin = money_bin+$1
+        let sql = `UPDATE bar_owner set money_bin = money_bin+$1
                     where id= $2;`;
         const values = [cost, event_id];
 
@@ -221,7 +221,7 @@ module.exports = class EventOrganizerDAO {
             return undefined;
         }
 
-        let sql = `UPDATE event_organizer set money_bin = 0
+        let sql = `UPDATE bar_owner set money_bin = 0
                     where id= $1;`;
         const values = [event_id];
 
