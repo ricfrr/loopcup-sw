@@ -199,19 +199,18 @@ module.exports = class ProfileDAO {
     /**
      *  return a list of coupon give the profile id
      */
-    static async insertTrashProfile(profile_id, trash_id) {
-        if (profile_id == undefined || trash_id == undefined) {
+    static async insertCupProfile(profile_id, cup_id) {
+        if (profile_id == undefined || cup_id == undefined) {
             return undefined;
         }
 
-        let sql = `INSERT INTO trash_profile(profile_id,trash_id,pair_time,collected) VALUES
+        let sql = `INSERT INTO cup_profile(profile_id,cup_id,pair_time,collected) VALUES
                     ($1,$2,now(),false)`;
-        const values = [profile_id, trash_id];
+        const values = [profile_id, cup_id];
 
         try {
             const result = await db.query(sql, values);
             console.log(result);
-            let trashes = [];
             if (result != undefined) {
                 console.log("inserted");
                 return 1;
@@ -228,21 +227,21 @@ module.exports = class ProfileDAO {
     /**
      *  return a profile id given the profile id
      */
-    static async getProfileIdByTrashId(trash_id) {
-        if (trash_id == undefined) {
+    static async getProfileIdByCupId(cup_id) {
+        if (cup_id == undefined) {
             return undefined;
         }
 
-        let sql = `SELECT trash_profile.profile_id 
-                    FROM trash_profile 
-                    WHERE trash_id= $1 and collected = true;`;
-        const values = [trash_id];
+        let sql = `SELECT cup_profile.profile_id 
+                    FROM cup_profile 
+                    WHERE cup_id= $1 and collected = true;`;
+        const values = [cup_id];
 
         try {
             const result = await db.query(sql, values);
             console.log(result);
             let profile_id = undefined;
-            if (result != undefined) {
+            if (result.length != 0 ) {
                 profile_id = result[0].profile_id
             }
             return profile_id;
@@ -311,12 +310,12 @@ module.exports = class ProfileDAO {
     }
 
 
-    static async increaseMoneyBin(profile_id, cost) {
+    static async increaseLoopCoins(profile_id, cost) {
         if (profile_id == undefined || cost == undefined) {
             return undefined;
         }
 
-        let sql = `UPDATE profile set money_bin = money_bin+$1
+        let sql = `UPDATE profile set loop_coins = loop_coins+$1
                     where id= $2;`;
         const values = [cost, profile_id];
 
@@ -324,7 +323,7 @@ module.exports = class ProfileDAO {
             const result = await db.query(sql, values);
             console.log(result);
             if (result != undefined) {
-                console.log("money_bin updated");
+                console.log("loop_coins updated");
                 return 1;
             } else {
                 return 0;

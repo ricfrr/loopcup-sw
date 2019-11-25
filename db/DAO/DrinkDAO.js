@@ -128,8 +128,8 @@ module.exports = class CouponDAO {
             if (result != undefined) {
                 let coup = await this.getDrinkById(coupon_id)
                 await ProfileDAO.decreaseLoopCoins(profile_id,coup.getCost())
-                let ev_org = await EventOrganizerDAO.getEventOrganizerByCouponId(coupon_id);
-                EventOrganizerDAO.increaseMoneyBin(ev_org.getEventOrganizerId(),coup.getCost())
+                let ev_org = await EventOrganizerDAO.getEventOrganizerByDrinkId(coupon_id);
+                EventOrganizerDAO.increaseLoopCoins(ev_org.getEventOrganizerId(),coup.getCost())
                 console.log("drinks ok!");
                 return 1 ;
             }else{

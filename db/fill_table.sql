@@ -14,8 +14,8 @@ INSERT INTO coupon (id,cost, message, bar_owner_id, description, img) VALUES
     ('364a8ecd-6d88-4405-be33-621b06a0e0fd',50, 'Mojito','5165e699-852c-46cd-a44a-4c50c5262b96','Traditionally, a mojito is a cocktail that consists of five ingredients: white rum, sugar (traditionally sugar cane juice), lime juice, soda water, and mint.[1][2] Its combination of sweetness, citrus, and herbaceous mint flavors is intended to complement the rum, and has made the mojito a popular summer drink.', 'images/mojito.jpg');
 
 
-INSERT INTO coupon_profile (profile_id,coupon_id,buy_time,used) VALUES
-    ('13f3edc7-996d-4e68-8489-67c578af1138','c1107fe2-96db-4bb5-905f-6132c7957b81',now(),false); 
+--INSERT INTO coupon_profile (profile_id,coupon_id,buy_time,used) VALUES
+--    ('13f3edc7-996d-4e68-8489-67c578af1138','c1107fe2-96db-4bb5-905f-6132c7957b81',now(),false); 
 
 INSERT INTO station(id,level,locked, bar_owner_id) VALUES
     ('b57bdd8e-2bae-4e40-bce6-c6c28f978a8c',10,false,'5165e699-852c-46cd-a44a-4c50c5262b96');
@@ -44,13 +44,13 @@ INSERT INTO cup(id,description) VALUES
 INSERT INTO cup(id,description) VALUES
     ('8966ecf3','cup');
 
-INSERT INTO cup_station(station_id,cup_id) VALUES
-    ('b57bdd8e-2bae-4e40-bce6-c6c28f978a8c','d9cff5f3');
+--INSERT INTO cup_station(station_id,cup_id) VALUES
+--    ('b57bdd8e-2bae-4e40-bce6-c6c28f978a8c','d9cff5f3');
 
-INSERT INTO cup_profile(profile_id,cup_id,pair_time,collected) VALUES
-    ('13f3edc7-996d-4e68-8489-67c578af1138','d9cff5f3', now(), true);
+--INSERT INTO cup_profile(profile_id,cup_id,pair_time,collected) VALUES
+--    ('13f3edc7-996d-4e68-8489-67c578af1138','d9cff5f3', now(), true);
 
-INSERT INTO cup_profile(profile_id,cup_id,pair_time,collected) VALUES
-    ('13f3edc7-996d-4e68-8489-67c578af1138','891df5f3', now(), false);
+--INSERT INTO cup_profile(profile_id,cup_id,pair_time,collected) VALUES
+--    ('13f3edc7-996d-4e68-8489-67c578af1138','891df5f3', now(), false);
 
 

@@ -106,7 +106,7 @@ module.exports = class BinDAO {
             const result1 = await db.query(sql1, values1);
             const result2 = await db.query(sql2, values2);
             console.log(result2);
-            if (result2 != undefined) {
+            if (result1 != undefined) {
                 console.log("inserted");
                 return 1 ;
             }else{

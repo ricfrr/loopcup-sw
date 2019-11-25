@@ -32,9 +32,9 @@ router.get('/cup/:id', async function (req, res, next) {
 
 router.post('/pair', async function (req, res, next) {
     let profile_id = req.body.profile_id;
-    let trash_id = req.body.trash_id;
+    let cup_id = req.body.cup_id;
 
-    if (profile_id == undefined || trash_id == undefined) {
+    if (profile_id == undefined || cup_id == undefined) {
         res.status(400).end();
         return;
     }
@@ -45,30 +45,31 @@ router.post('/pair', async function (req, res, next) {
 
     try {
         profile = await ProfileDAO.getProfileById(profile_id);
-        trash = await CupDAO.getTrashById(trash_id);
-        is_collected = await StationDAO.isTrashInsideTheBin(trash_id);
-        is_paired = await CupDAO.isAlreadyPaired(trash_id)
+        cup = await CupDAO.getCupById(cup_id);
+        is_collected = await StationDAO.isCupInsideTheBin(cup_id);
+        is_paired = await CupDAO.isAlreadyPaired(cup_id)
     } catch (err) {
-        res.status(200).json({ paired: false }).end();
+        res.status(401).end();
     }
 
 
-    if (profile != undefined && trash != undefined) {
+    if (profile != undefined && cup != undefined) {
         if (!is_collected && !is_paired) {
-            let result = await ProfileDAO.insertTrashProfile(profile_id, trash_id);
+            let result = await ProfileDAO.insertCupProfile(profile_id, cup_id);
             if (result == 0) {
-
+                res.status(401).end();
+       
                 return;
             } else {
                 res.status(200).json({ paired: true }).end();
                 return;
             }
         } else {
-            res.status(200).json({ paired: false }).end();
+            res.status(401).end();
         }
 
     } else {
-        res.status(200).json({ paired: false }).end();
+        res.status(401).end();
     }
 });
 
@@ -129,7 +130,7 @@ router.post('/register', async function (req, res, next) {
 
 router.get('/success/:id/:amount', async function (req, res, next) {
     try {
-        ProfileDAO.increaseMoneyBin(req.params.id, req.params.amount * 10);
+        ProfileDAO.increaseLoopCoins(req.params.id, req.params.amount * 10);
         res.sendStatus(200).end()
     } catch (error) {
         res.sendStatus(401).end()
@@ -154,7 +155,7 @@ router.get('/pay/:id/:amount', async function (req, res, next) {
         res.status(401).end();
     }
 
-    var url = "http://192.168.1.41:5000/profile/";
+    var url = "http://192.168.1.4:5000/profile/";
     //var url = "http://52.143.156.181/profile/";
 
 

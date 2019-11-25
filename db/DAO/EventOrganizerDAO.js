@@ -141,16 +141,16 @@ module.exports = class EventOrganizerDAO {
     /**
      *  return a list of coupon give the profile mail
      */
-    static async getEventOrganizerByBinId(bin_id) {
-        if (bin_id == undefined) {
+    static async getEventOrganizerByLoopStationId(station_id) {
+        if (station_id == undefined) {
             return undefined;
         }
 
-        let sql = `select bar_owner.id, bar_owner.profile_name,bar_owner.mail,bar_owner.password, bar_owner.money_trash,  bar_owner.money_bin 
-                   from bin join bar_owner 
-                   on bin.event_id= bar_owner.id
-                   where bin.id =$1;`;
-        const values = [bin_id];
+        let sql = `select bar_owner.id, bar_owner.profile_name,bar_owner.mail,bar_owner.password, bar_owner.loop_coins,  bar_owner.money_bin 
+                   from station join bar_owner 
+                   on station.bar_owner_id= bar_owner.id
+                   where station.id =$1;`;
+        const values = [station_id];
 
         try {
             const result = await db.query(sql, values);
@@ -168,8 +168,8 @@ module.exports = class EventOrganizerDAO {
     /**
  *  return a list of coupon give the profile mail
  */
-    static async getEventOrganizerByCouponId(coupon_id) {
-        if (coupon_id == undefined) {
+    static async getEventOrganizerByDrinkId(drink_id) {
+        if (drink_id == undefined) {
             return undefined;
         }
 
@@ -177,14 +177,14 @@ module.exports = class EventOrganizerDAO {
                     from coupon join bar_owner 
                     on coupon.bar_owner_id= bar_owner.id
                     where coupon.id =$1;`;
-        const values = [coupon_id];
+        const values = [drink_id];
 
         try {
             const result = await db.query(sql, values);
             console.log(result);
             let event_org = undefined;
             if (result != undefined && result.length != 0) {
-                event_org = new EventOrganizer(result[0].id, result[0].profile_name, result[0].mail, result[0].password, result[0].money_trash, result[0].money_bin);
+                event_org = new EventOrganizer(result[0].id, result[0].profile_name, result[0].mail, result[0].password, result[0].loop_coins, result[0].money_bin);
             }
             return event_org;
         } catch (err) {
@@ -193,20 +193,42 @@ module.exports = class EventOrganizerDAO {
     }
 
 
-    static async increaseMoneyBin(event_id, cost) {
-        if (event_id == undefined || cost == undefined) {
+    static async increaseLoopCoins(bar_owner_id, cost) {
+        if (bar_owner_id == undefined || cost == undefined) {
             return undefined;
         }
 
-        let sql = `UPDATE bar_owner set money_bin = money_bin+$1
+        let sql = `UPDATE bar_owner set loop_coins = loop_coins+$1
                     where id= $2;`;
-        const values = [cost, event_id];
+        const values = [cost, bar_owner_id];
 
         try {
             const result = await db.query(sql, values);
             console.log(result);
             if (result != undefined) {
-                console.log("money_bin updated");
+                console.log("loop_coins updated");
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (err) {
+            throw err;
+        }
+    }
+    static async decreaseLoopCoins(bar_owner_id, cost) {
+        if (bar_owner_id == undefined || cost == undefined) {
+            return undefined;
+        }
+
+        let sql = `UPDATE bar_owner set loop_coins = loop_coins+$1
+                    where id= $2;`;
+        const values = [cost, bar_owner_id];
+
+        try {
+            const result = await db.query(sql, values);
+            console.log(result);
+            if (result != undefined) {
+                console.log("loop_coins updated");
                 return 1;
             } else {
                 return 0;
