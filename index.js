@@ -8,7 +8,7 @@ var paypal = require('paypal-rest-sdk');
 var profileRouter = require('./routes/profileRoutes');
 var stationRouter = require('./routes/stationRoutes');
 var drinkRouter = require('./routes/drinkRoutes');
-//var organizerRouter = require('./routes/organizerRoutes');
+var organizerRouter = require('./routes/organizerRoutes');
 
 
 
@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/station', stationRouter);
 app.use('/profile', profileRouter);
 app.use('/drink', drinkRouter);
-
+app.use('/owner', organizerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

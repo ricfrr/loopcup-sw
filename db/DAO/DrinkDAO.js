@@ -22,7 +22,7 @@ module.exports = class CouponDAO {
             let tempCoupon;
             console.log(result);
             if (result != undefined && result.length !=0) {
-                tempCoupon = new Drink(result[0].id, result[0].cost,  result[0].message, result[0].event_id, result[0].description,result[0].img);
+                tempCoupon = new Drink(result[0].id, result[0].cost,  result[0].message, result[0].bar_owner_id, result[0].description,result[0].img);
             }
             return tempCoupon;
         } catch (err) {
@@ -33,7 +33,7 @@ module.exports = class CouponDAO {
     /**
      *  return a coupon given the transaction id  
      */
-    static async getCouponByTransactionId(coupon_id) {
+    static async getDrinkByTransactionId(coupon_id) {
         if (coupon_id == undefined) {
             return undefined;
         }
@@ -143,7 +143,7 @@ module.exports = class CouponDAO {
     /**
      *  validate a coupon
      */
-    static async validateCoupon(coupon_id) {
+    static async validateDrink(coupon_id) {
         if (coupon_id == undefined) {
             return undefined;
         }
